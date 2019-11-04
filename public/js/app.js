@@ -67508,18 +67508,12 @@ var render = function() {
                         {
                           directives: [
                             {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isadmin,
-                              expression: "isadmin"
-                            },
-                            {
                               name: "b-modal",
                               rawName: "v-b-modal.modalPopover",
                               modifiers: { modalPopover: true }
                             }
                           ],
-                          attrs: { href: "#" }
+                          attrs: { disabled: !_vm.isadmin, href: "#" }
                         },
                         [_c("b", [_vm._v("+")])]
                       ),

@@ -43,7 +43,7 @@ class EvsController extends Controller
 
          $this->validate($request,[
             'title' =>       'required',
-            'image' =>       'required', //|min:10|mimes:jpeg,bmp,png
+            'image' =>       'required|min:10|mimes:jpeg,bmp,png', //
             'type' =>     'required',
           ]);
 

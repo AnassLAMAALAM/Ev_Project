@@ -15,7 +15,7 @@
 
                             <b-card 
                               border-variant="primary"
-                              :header="ev.title"
+                              :header="ev.title" 
                               header-bg-variant="primary"
                               header-text-variant="white"
                               align="center" 
@@ -38,7 +38,7 @@
                 </b-tab>
 
                  <template v-slot:tabs-end>
-                    <b-nav-item v-show="isadmin" v-b-modal.modalPopover  href="#"><b>+</b></b-nav-item>
+                    <b-nav-item  :disabled="!isadmin"    v-b-modal.modalPopover  href="#"><b>+</b></b-nav-item>
                      <b-modal id="modalPopover" title="Add a new Type"
                      @ok="handleOk" >
                         <form ref="form" @submit.stop.prevent="handleSubmit">
