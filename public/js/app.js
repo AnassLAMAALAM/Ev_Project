@@ -1775,6 +1775,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['isadmin'],
   data: function data() {
     return {
       tabIndex: 0,
@@ -1792,6 +1793,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    console.log(this.isadmin);
     this.freshTypes();
   },
   methods: {
@@ -1903,11 +1905,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       types: [],
+      errors: [],
       title: '',
+      title_error: '',
+      image_error: '',
+      type_error: '',
       type: '',
       image: ''
     };
@@ -1949,7 +1965,13 @@ __webpack_require__.r(__webpack_exports__);
         _this2.title = '';
         _this2.type = '';
         _this2.image = '';
-      })["catch"](function (error) {});
+        _this2.errors = [];
+      })["catch"](function (error) {
+        if (error.response.status == 422) {
+          _this2.errors = error.response.data.errors;
+          console.log(_this2.errors);
+        }
+      });
     }
   }
 });
@@ -67486,6 +67508,12 @@ var render = function() {
                         {
                           directives: [
                             {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.isadmin,
+                              expression: "isadmin"
+                            },
+                            {
                               name: "b-modal",
                               rawName: "v-b-modal.modalPopover",
                               modifiers: { modalPopover: true }
@@ -67756,7 +67784,7 @@ var render = function() {
                   staticClass: "mb-0",
                   attrs: {
                     "label-cols-lg": "3",
-                    label: "Shipping Address",
+                    label: "Add New EV",
                     "label-size": "lg",
                     "label-class": "font-weight-bold pt-0",
                     enctype: "multipart/form-data"
@@ -67776,6 +67804,11 @@ var render = function() {
                     },
                     [
                       _c("b-form-input", {
+                        class: [
+                          _vm.errors.title
+                            ? "form-control is-invalid"
+                            : "form-control"
+                        ],
                         attrs: { id: "nested-title" },
                         model: {
                           value: _vm.title,
@@ -67784,7 +67817,17 @@ var render = function() {
                           },
                           expression: "title"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.title
+                        ? _c("span", { staticStyle: { color: "red" } }, [
+                            _vm._v(
+                              "\r\n            " +
+                                _vm._s(_vm.errors.title[0]) +
+                                " \r\n        "
+                            )
+                          ])
+                        : _vm._e()
                     ],
                     1
                   ),
@@ -67802,9 +67845,24 @@ var render = function() {
                     [
                       _c("input", {
                         staticClass: "form-control",
+                        class: [
+                          _vm.errors.image
+                            ? "form-control is-invalid"
+                            : "form-control"
+                        ],
                         attrs: { type: "file", multiple: "" },
                         on: { change: _vm.onImageChange }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.image
+                        ? _c("span", { staticStyle: { color: "red" } }, [
+                            _vm._v(
+                              "\r\n              " +
+                                _vm._s(_vm.errors.image[0]) +
+                                " \r\n          "
+                            )
+                          ])
+                        : _vm._e()
                     ]
                   ),
                   _vm._v(" "),
@@ -67822,6 +67880,11 @@ var render = function() {
                       _c(
                         "b-form-select",
                         {
+                          class: [
+                            _vm.errors.type
+                              ? "form-control is-invalid"
+                              : "form-control"
+                          ],
                           attrs: { id: "nested-type" },
                           model: {
                             value: _vm.type,
@@ -67840,6 +67903,16 @@ var render = function() {
                         }),
                         0
                       ),
+                      _vm._v(" "),
+                      _vm.errors.type
+                        ? _c("span", { staticStyle: { color: "red" } }, [
+                            _vm._v(
+                              "\r\n               " +
+                                _vm._s(_vm.errors.type[0]) +
+                                " \r\n          "
+                            )
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -80279,8 +80352,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\DELPHI Projects\blog\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\DELPHI Projects\blog\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\DELPHI Projects\Ev_Project\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\DELPHI Projects\Ev_Project\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

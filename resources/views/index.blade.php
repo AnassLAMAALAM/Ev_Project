@@ -8,7 +8,7 @@
         <div class="col-md-12">
                 
             <div class="card">
-                <example-component>   </example-component>
+            <example-component :isadmin="{{App\User::admin()}}">   </example-component>
             </div>
         </div>
     </div>

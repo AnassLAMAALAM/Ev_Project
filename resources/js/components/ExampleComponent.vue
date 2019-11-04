@@ -38,7 +38,7 @@
                 </b-tab>
 
                  <template v-slot:tabs-end>
-                    <b-nav-item v-b-modal.modalPopover  href="#"><b>+</b></b-nav-item>
+                    <b-nav-item v-show="isadmin" v-b-modal.modalPopover  href="#"><b>+</b></b-nav-item>
                      <b-modal id="modalPopover" title="Add a new Type"
                      @ok="handleOk" >
                         <form ref="form" @submit.stop.prevent="handleSubmit">
@@ -77,6 +77,7 @@
 
 <script>
     export default {
+      props:['isadmin'],
         data() {
             return {
                 tabIndex: 0,
@@ -94,6 +95,7 @@
             }
         },
           created: function () {
+             console.log(this.isadmin);
               this.freshTypes();
             },
               methods:{

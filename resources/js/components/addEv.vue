@@ -4,7 +4,7 @@
   <b-card bg-variant="light">
     <b-form-group
       label-cols-lg="3"
-      label="Shipping Address"
+      label="Add New EV"
       label-size="lg"
       label-class="font-weight-bold pt-0"
       class="mb-0"
@@ -16,7 +16,12 @@
         label-align-sm="right"
         label-for="nested-title"
       >
-        <b-form-input v-model="title" id="nested-title"></b-form-input>
+        <b-form-input v-model="title" :class="[errors.title ? 'form-control is-invalid' : 'form-control']" id="nested-title"></b-form-input>
+        <span v-if="errors.title" style="color:red;" >
+            {{ errors.title[0] }} 
+        </span>
+
+
       </b-form-group>
 
 
@@ -26,19 +31,24 @@
         label-align-sm="right"
         label-for="nested-image"
       >
-          <input type="file" @change="onImageChange" multiple  class="form-control">
+          <input type="file" :class="[errors.image ? 'form-control is-invalid' : 'form-control']" @change="onImageChange" multiple  class="form-control">
+          <span v-if="errors.image" style="color:red;" >
+              {{ errors.image[0] }} 
+          </span>
       </b-form-group>
-
-    
+      
       <b-form-group
         label-cols-sm="3"
         label="Type:"
         label-align-sm="right"
         label-for="nested-type"
       >
-        <b-form-select v-model="type"  id="nested-type">
-            <option v-for="type in types"  v-bind:value="type.id" :key="type.id" > {{ type.type }}  </option>
+        <b-form-select v-model="type" :class="[errors.type ? 'form-control is-invalid' : 'form-control']" id="nested-type">
+            <option v-for="type in types"   v-bind:value="type.id" :key="type.id" > {{ type.type }}  </option>
         </b-form-select>
+          <span v-if="errors.type" style="color:red;" >
+               {{ errors.type[0] }} 
+          </span>
 
         <div style="margin-top:10px;">
             <b-button block variant="primary" type="submit" >Block Level Button</b-button>
@@ -61,7 +71,11 @@
         data() {
             return {
                 types:[],
+                errors : [],
                 title:'',
+                title_error : '',
+                image_error : '',
+                type_error : '',
                 type:'',
                 image:''
             }
@@ -101,9 +115,14 @@
             this.title = '';
             this.type = '';
             this.image = '';
+            this.errors = [];
 
           })
           .catch( error => {
+               if (error.response.status == 422) {
+                 this.errors = error.response.data.errors;
+                 console.log(this.errors);
+               }
             })
       }
 

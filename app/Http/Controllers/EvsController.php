@@ -29,10 +29,7 @@ class EvsController extends Controller
      */
     public function create()
     {
-        $index = -1;
-        $array = array("","LAM", "rjkx5j", "saran", "mohan", "saran"); 
-        $index = (int) array_search(get_current_user(),$array,false);
-        return $index;
+        
     }
 
     /**
@@ -43,6 +40,15 @@ class EvsController extends Controller
      */
     public function store(Request $request)
     {
+
+         $this->validate($request,[
+            'title' =>       'required',
+            'image' =>       'required', //|min:10|mimes:jpeg,bmp,png
+            'type' =>     'required',
+          ]);
+
+
+
         $image_path = "";
         if ($request->file('image') != "") {
         $file = $request->file('image');

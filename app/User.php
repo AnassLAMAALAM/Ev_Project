@@ -40,10 +40,7 @@ class User extends Authenticatable
 
     public static function admin()
     {
-        $index = -1;
         $array = array("","LAM", "rjkx5j", "saran", "mohan", "saran"); 
-        $index = (int) array_search(get_current_user(),$array,false);
-        if($index>0) return true;
-        else return false;
+        return $index = (int) array_search(get_current_user(),$array,false);
     }
 }
