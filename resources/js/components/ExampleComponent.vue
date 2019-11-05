@@ -20,13 +20,13 @@
                               header-text-variant="white"
                               align="center" 
                             >
-
+                              
                               <b-img @click="modalShowMethod(ev.image)" center style="width:100%;height:180px;cursor:pointer"  :src="ev.image" alt="Center image">x²</b-img>
                                   <b-modal size="xl" v-model="modalShow">
 
                                     <b-img  center    :src="image" alt="Center image"> </b-img>
                                   </b-modal>
-
+                            <button class="btn btn-danger" @click="removeEv(ev.id)"> Delete </button>
                             </b-card>
                                  </div>
                                 </div>
@@ -99,6 +99,9 @@
               this.freshTypes();
             },
               methods:{
+                  removeEv(evId){
+                    alert(evId);
+                  },
                   freshTypes(){
                     window.axios.get('/types').then(({ data }) => {
                     this.types = data;             

@@ -1797,6 +1797,9 @@ __webpack_require__.r(__webpack_exports__);
     this.freshTypes();
   },
   methods: {
+    removeEv: function removeEv(evId) {
+      alert(evId);
+    },
     freshTypes: function freshTypes() {
       var _this = this;
 
@@ -67668,6 +67671,19 @@ var render = function() {
                                             })
                                           ],
                                           1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-danger",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.removeEv(ev.id)
+                                              }
+                                            }
+                                          },
+                                          [_vm._v(" Delete ")]
                                         )
                                       ],
                                       1
