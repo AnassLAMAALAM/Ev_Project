@@ -17,7 +17,9 @@ class CreateEvsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('image');
+            $table->text('pdf');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

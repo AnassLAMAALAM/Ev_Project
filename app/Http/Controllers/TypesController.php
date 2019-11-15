@@ -15,7 +15,7 @@ class TypesController extends Controller
     public function store(Request $request){
       
         $t = new Type();
-        $t->type = $request->type;
+        $t->type = ucfirst($request->type);
 
         $t->save();
         if (request()->expectsJson()) {

@@ -31,11 +31,25 @@
         label-align-sm="right"
         label-for="nested-image"
       >
-          <input type="file" :class="[errors.image ? 'form-control is-invalid' : 'form-control']" @change="onImageChange" multiple  class="form-control">
+          <input type="file"  :class="[errors.image ? 'form-control is-invalid' : 'form-control']" @change="onImageChange" multiple  class="form-control">
           <span v-if="errors.image" style="color:red;" >
               {{ errors.image[0] }} 
           </span>
       </b-form-group>
+
+      <b-form-group
+        label-cols-sm="3"
+        label="File PDF:"
+        label-align-sm="right"
+        label-for="nested-image"
+      >
+          <input type="file" :class="[errors.pdf ? 'form-control is-invalid' : 'form-control']"    @change="onPDFChange" multiple  class="form-control">
+          <span v-if="errors.pdf" style="color:red;" >
+              {{ errors.pdf[0] }} 
+          </span>
+      </b-form-group>
+
+
       
       <b-form-group
         label-cols-sm="3"
@@ -51,7 +65,9 @@
           </span>
 
         <div style="margin-top:10px;">
-            <b-button block variant="primary" type="submit" >Block Level Button</b-button>
+            <b-button block variant="primary" type="submit" >
+              <i class="fas fa-plus-circle"></i> Add
+             </b-button>
         </div>
       
       </b-form-group>
@@ -77,7 +93,8 @@
                 image_error : '',
                 type_error : '',
                 type:'',
-                image:''
+                image:'',
+                pdf:''
             }
         },
           created: function () {
@@ -90,7 +107,11 @@
               methods:{
 
              onImageChange(event){
-        this.image = event.target.files[0];
+               alert("image");
+              this.image = event.target.files[0];
+        },
+        onPDFChange(event){
+              this.pdf = event.target.files[0];
         },
 
 
@@ -106,6 +127,7 @@
         formData.append('title', this.title);
         formData.append('type', this.type);
         formData.append('image', this.image);
+        formData.append('pdf', this.pdf);
 
         console.log(formData);
          axios.post('/ev/create',formData, config)
