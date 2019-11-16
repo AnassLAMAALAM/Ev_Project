@@ -11,9 +11,9 @@
                             <b-card-group deck>
 
                                 <div class="row">
-                                    <div class="col col-lg-4" :key="ev.id" v-for="(ev,index) in type.evs" style="margin-top:20px;">
+                                    <div class="col col-lg-4" :key="ev.id" v-for="(ev,index) in type.evs" style="margin-top:20px;height:320px;">
 
-                                        <b-card border-variant="primary" :header="ev.title" header-bg-variant="primary" header-text-variant="white" align="center">
+                                        <b-card border-variant="primary" style="margin-top:20px;height:320px;" :header="ev.title" header-bg-variant="primary" header-text-variant="white" align="center">
 
                                             <b-img @click="modalShowMethod(ev.image)" center style="width:100%;height:180px;cursor:pointer" :src="ev.image" alt="Center image">x²</b-img>
                                             <b-modal size="xl" v-model="modalShow">

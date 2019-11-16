@@ -46,7 +46,7 @@ class EvsController extends Controller
          $this->validate($request,[
             'title' =>       'required',
             'image' =>       'required', //
-            'pdf' =>       'required',
+           // 'pdf' =>       'required',
             'type' =>        'required',
           ]);
 
@@ -64,9 +64,6 @@ class EvsController extends Controller
         $filenametostore = time().'_'.$file->getClientOriginalName().'.'.$file->getClientOriginalExtension();
         $image_path= $file->move('storage/images',$filenametostore);
         
-
-        
-
 
        // $converter = new OfficeConverter($filenametostore, 'storage/images');
         //CloudConvert::file($image_path)->pageRange(2, 4)->to('jpg');
