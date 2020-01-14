@@ -26,9 +26,22 @@ if(App\User::admin()){
 }
 
 Route::get('/types', 'EvsController@index')->name('types');
+Route::get('/types/{title}', 'EvsController@find')->name('types');
+
 
 Route::post('/ev/create', 'EvsController@store')->name('createEv');
+
+Route::get('/evs', 'EvsController@evs');
 
 Route::delete('/evs/{id}', 'EvsController@destroy')->name('deleteEv');
 
 Route::post('/type/create', 'TypesController@store')->name('createType');
+
+
+Route::get('/type/edit/{id}', 'EvsController@edit')->name('editEv');
+
+Route::post('/ev/update/{id}', 'EvsController@update')->name('editEv');
+
+
+
+?>

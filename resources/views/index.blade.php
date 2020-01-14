@@ -5,10 +5,9 @@
     <div class="row justify-content-center">
 
             
-        <div class="col-md-12">
-                
-            <div class="card">
-            <example-component :isadmin="{{App\User::admin()}}">   </example-component>
+        <div class="col-md-12">    
+            <div class="card" id="app">
+                <router-view></router-view>
             </div>
         </div>
     </div>

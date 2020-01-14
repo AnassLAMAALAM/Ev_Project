@@ -19,20 +19,19 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/solid.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
+   
 
 
 
     <!-- Front awsome -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"> 
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
+    <div >
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container" >
                 <a class="navbar-brand" href="{{ url('/') }}">
+                    <img style="width:20%;" src="/storage/aptiv.png" />
                     {{ config('Visual aid application', 'Visual aid application') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -47,17 +46,18 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                            @if (App\User::admin())
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('allEv') }}">{{ __('All Ev') }}</a>
                             </li>
 
-                            @if (App\User::admin())
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('newType') }}">{{ __('Add New Type') }}</a>
+                                <a class="nav-link" href="{{ route('newType') }}">{{ __('Add a New Visuel Aid') }}</a>
                             </li>
                             @endif
 
-                        <!-- Authentication Links -->
+                        <!-- Authentication Links 
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -86,6 +86,7 @@
                                 </div>
                             </li>
                         @endguest
+                        -->
                     </ul>
                 </div>
             </div>
@@ -95,5 +96,12 @@
             @yield('content')
         </main>
     </div>
+    <footer class="row fixed-bottom" style="background-color: #0A79DF">
+            <div class="col-xs-12 col-sm-4 col-md-4 footer-column"> </div>
+        <div  class="col-xs-12 col-sm-4 col-md-4 footer-column" style="text-align: center;"     ">
+             © Created by <strong> Anass LAMAALAM </strong> 2019
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 footer-column"> </div>
+    </footer>
 </body>
 </html>
