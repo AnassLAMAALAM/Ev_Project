@@ -22,12 +22,23 @@
         </b-form-group>
       </b-col >
 
-      <b-col lg="3" class="my-1" > </b-col>
+      <b-col lg="6" class="my-1"  >
+        
+        <div  style="float:right;">
+         <b-button v-b-modal.modalPopover v-b-tooltip title="new type" >Add a new Type  </b-button>
 
-      <b-col lg="3" class="my-1" >
-        <router-link to="/new-aid-visual" >  
+          <router-link to="/new-aid-visual" >  
         <a class=" btn btn-outline-primary" v-b-tooltip title="new aid visual" to="/new-aid-visual" role="button"><i class="fas fa-plus"> Add new aid visual</i></a>
         </router-link>
+        </div>
+          <b-modal id="modalPopover" title="Add a new Type" @ok="handleOk">
+              <form ref="form" @submit.stop.prevent="handleSubmit">
+
+                  <b-form-group label="New Type" label-for="type-input" invalid-feedbackçç="Name is required">
+                      <b-form-input id="type-input" v-model="newType" required></b-form-input>
+                  </b-form-group>
+              </form>
+          </b-modal>
         
 
         
@@ -116,14 +127,14 @@
       </template>
 
       <template v-slot:cell(actions)="row">
-        
+         <router-link to="/new-aid-visual" >
+            <a class="btn btn-outline-primary" style="visibility: hidden;" v-b-tooltip title="new aid visual" to="/new-aid-visual" role="button"><i class="fas fa-plus"></i></a>
+        </router-link>
        <button  type="button" class="btn btn-outline-danger" v-b-tooltip title="delete" @click="removeEv(row.item.id)"> <i class="far fa-trash-alt"></i></button>
         <a class="btn btn-outline-secondary" :href="`${row.item.pdf}`" v-b-tooltip title="show pdf" role="button"><i class="fas fa-file-pdf"></i></a>
-        <router-link to="/new-aid-visual">
-            <a class="btn btn-outline-primary" v-b-tooltip title="new aid visual" to="/new-aid-visual" role="button"><i class="fas fa-plus"></i></a>
-        </router-link>
+       
         <button class="btn btn-outline-success" v-b-tooltip title="edit"  @click="edit(row.item.id)" role="button"><i class="fas fa-edit"></i></button>
-        
+
       </template>
 
       <template v-slot:row-details="row">
@@ -257,6 +268,25 @@
             ]            
             }); 
             },
+
+                            handleSubmit: function() {
+
+                    let currentObj = this;
+                    let formData = new FormData();
+                    formData.append('type', this.newType);
+                    axios.post('/type/create', formData)
+                        .then(res => {
+                            console.log(res.data.message);
+                            this.$toast.success(res.data.message, "Success", {
+                                timeout: 3000
+                            });
+                            this.newType = '';
+                            this.freshTypes();
+
+                        })
+                        .catch(error => {})
+
+                },
       info(item, index, button) {
         this.infoModal.title = `Row index: ${index}`
         this.infoModal.content = JSON.stringify(item, null, 2)
