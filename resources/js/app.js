@@ -42,7 +42,7 @@ import VueRouter from 'vue-router';
 
 const routes = [  
     { path: '/', component: home },
-    { path: '/admin', component: homeAdmin },
+    { path: '/admin/db09cd1b35b31c5f6a9aa2541f27ae75', component: homeAdmin },
     { path: '/new-aid-visual', component: newAidVisual },
     { path: '/edit-aid-visual/:id', name:"edit-aid-visual", component: editAidVisual },
   ];

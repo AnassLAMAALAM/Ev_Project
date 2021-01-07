@@ -1,7 +1,7 @@
 <template>
     <div>
 
-         
+
         <!-- Tabs with card integration -->
         <b-form-input style="width:40%;margin:10px auto;text-align:center"
           id="input-1"
@@ -18,11 +18,11 @@
             <b-tabs v-model="tabIndex" card align="center">
                 <b-tab :title="(type.type +' ('+type.evs_count+')')" :key="type.id" v-for="type in types">
                     <div>
-                        
+
                         <b-container class="bv-example-row">
 
                             <b-card-group deck>
-                                
+
                                 <div class="row" v-if="type.evs_count>0" style="width: 100%;">
                                     <div class = "col col-lg-4"  :key="ev.id" v-for="(ev,index) in type.evs" style="margin-top:20px;height:320px;">
 
@@ -34,7 +34,7 @@
                                                 <b-img center style="width:100%;" :src="image" alt="Center image"> </b-img>
                                             </b-modal>
                                             <div style="margin-top:5px;">
-                                                <a class="btn btn-outline-secondary" target="_blank" v-b-tooltip title="Show pdf" :href="`${ev.pdf}`" role="button"><i class="fas fa-file-pdf"></i> Show pdf </a>                                          
+                                                <a class="btn btn-outline-secondary" target="_blank" v-b-tooltip title="Show pdf" :href="`${ev.pdf}`" role="button"><i class="fas fa-file-pdf"></i> Show pdf </a>
                                             </div>
                                         </b-card>
                                     </div>
@@ -49,7 +49,7 @@
                     </div>
 
                 </b-tab>
-
+                <!--
                 <template v-slot:tabs-end>
                     <b-nav-item  v-b-modal.modalPopover href="#"><b>+</b></b-nav-item>
                     <b-modal id="modalPopover" title="Add a new Type" @ok="handleOk">
@@ -62,7 +62,7 @@
                     </b-modal>
 
                 </template>
-
+                -->
             </b-tabs>
         </b-card>
         <!-- Control buttons-->
@@ -76,7 +76,7 @@
         </div>
     </div>
 </template>
-<script>    
+<script>
 import { log } from 'util';
     export default {
         name:'home',
@@ -105,27 +105,27 @@ import { log } from 'util';
             this.freshTypes();
         },
         methods: {
-         
+
           liveSearch(){
               this.filteredTypes = [];
               this.evs = [];
               let index = 0;
               let origineTypes = this.types;
             if (this.word_search != "") {
-                
-            
+
+
               for (let i = 0; i < this.types.length; i++) {
-         
-                 
+
+
                   for (let j = 0; j < this.types[i].evs.length; j++) {
                       if (this.word_search != "" && this.types[i].evs[j].title.toLowerCase().includes(this.word_search.toLowerCase())) {
                           console.log(this.types[i].evs[j].title);
                           this.evs.push(this.types[i].evs[j]);
                           index++;
                       }
-                      
+
                   }
-                  
+
               }
                 this.filteredTypes.push({ 'type' : 'result','evs':this.evs,'evs_count' : index});
                 this.types = this.filteredTypes;
@@ -135,7 +135,7 @@ import { log } from 'util';
                    //this.types = origineTypes;
                    this.freshTypes();
               }
-         
+
           },
 
 
@@ -147,7 +147,7 @@ import { log } from 'util';
                     window.axios.get('/types').then(({
                         data
                     }) => {
-                        
+
                         this.types = data;
                         this.spinning = false;
                     });
@@ -165,11 +165,11 @@ import { log } from 'util';
             displayMode: 'once',
             id: 'question',
             zindex: 999,
-            title: 'Hey',            
+            title: 'Hey',
             position: 'center',
             buttons: [
                 ['<button><b>YES</b></button>', (instance, toast) => {
-                    
+
                     window.axios.delete(`/evs/${evId}`)
                     .then(({data}) => {
                         this.freshTypes();
@@ -184,14 +184,14 @@ import { log } from 'util';
                 ['<button>NO</button>', function (instance, toast) {
                     instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
                 }],
-            ]            
-            });            
+            ]
+            });
 
 
-                       
 
 
-                    
+
+
 
                 },
                 modalShowMethod: function(image) {
